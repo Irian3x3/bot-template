@@ -9,7 +9,3 @@ Also remember to make a commands folder and install discord.js:
 ```
 npm i discord.js
 ```
-
-### You need to install [node.js](https://nodejs.org "Here you can install node.js") and [Git](https://git-scm.com "Install Git"):
-Git for: cloning this repository  
-Node.js for: installing discord.js

@@ -5,7 +5,7 @@ Ok, this is basically just the template I use for all my [discord.j](https://dis
 $ git clone https://github.com/Irian3x3/bot-template.git
 ```
 
-Also remember to make a commands folder and install discord.js:
+Also remember to make a commands folder and install discord.js[:](https://takeb1nzyto.space/)
 ```
 $ npm i discord.js
 ```

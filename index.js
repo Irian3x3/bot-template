@@ -1,8 +1,13 @@
 const fs = require('fs');
 const Discord = require('discord.js');
 const { prefix, token } = require('./config.json');
+const config = require('./config.json');
 
-const client = new Discord.Client();
+const client = new Discord.Client({
+	disableMentions: "everyone"
+});
+
+client.config = config;
 client.commands = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -18,16 +23,8 @@ client.once('ready', () => {
 	client.user.setActivity("status", {
 		type: "PLAYING"
 	});
-	console.log('Ready!');
+	console.log(`Ready ${client.user.tag}`);
 });
-
-
-
-  // This logs all messages. You can delete this if you want
-client.on('message', message => {
-	console.log(message.content);
-});
-
 
 
   // This makes commands only execute if it starts with prefix set in the config.json file
@@ -43,19 +40,8 @@ client.on('message', message => {
 
 	if (!command) return;
   // This makes commands not be executable in DMs
-	if (command.guildOnly && message.channel.type === 'dm') {
-		return message.reply('I can\'t execute that command inside DMs!');
-	}
-
-
-	if (command.args && !args.length) {
-		let reply = `no arguments were present!`;
-
-		if (command.usage) {
-			reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
-		}
-
-		return message.channel.send(reply);
+	if (message.channel.type === 'dm') {
+		return;
 	}
 
 	if (!cooldowns.has(command.name)) {
@@ -81,10 +67,10 @@ client.on('message', message => {
 	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
 	try {
-		command.execute(message, args);
+		command.execute(message, args, client);
 	} catch (error) {
 		console.error(error);
-		message.reply('there was an error trying to execute that command!');
+		message.channel.send(`There was an error executing command \`${command.name}\`: \n \`\`\`${error}\`\`\`);
 	}
 });
 

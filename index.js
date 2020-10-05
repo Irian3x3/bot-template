@@ -4,7 +4,7 @@ const { prefix, token } = require('./config.json');
 const config = require('./config.json');
 
 const client = new Discord.Client({
-	disableMentions: "everyone"
+	disableMentions: "everyone" // This is optional.
 });
 
 client.config = config;
@@ -27,7 +27,6 @@ client.once('ready', () => {
 });
 
 
-  // This makes commands only execute if it starts with prefix set in the config.json file
 client.on('message', message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
@@ -42,6 +41,12 @@ client.on('message', message => {
   // This makes commands not be executable in DMs
 	if (message.channel.type === 'dm') {
 		return;
+	}
+	if (command.ownerOnly && !config.owners.includes(message.author.id)) {
+	    const nope = new Discord.MessageEmbed()
+			.setDescription("Only bot owner can execute this command!")
+			.setColor("RED")
+		return message.channel.send(nope)
 	}
 
 	if (!cooldowns.has(command.name)) {
@@ -70,7 +75,7 @@ client.on('message', message => {
 		command.execute(message, args, client);
 	} catch (error) {
 		console.error(error);
-		message.channel.send(`There was an error executing command \`${command.name}\`: \n \`\`\`${error}\`\`\`);
+		message.channel.send(`There was an error executing the command \`${command.name}\`: \n \`\`\`${error}\`\`\`);
 	}
 });
 

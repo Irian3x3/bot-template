@@ -10,3 +10,5 @@ $ git clone https://github.com/Irian3x3/bot-template.git
 $ npm i discord.js
 ```
 > ### [Example](/commands/cmd-example.js) of how a command would look like
+
+## [License (MIT)](/LICENSE)

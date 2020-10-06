@@ -4,7 +4,7 @@ const { prefix, token } = require('./config.json');
 const config = require('./config.json');
 
 const client = new Discord.Client({
-	disableMentions: "everyone" // This is optional.
+	disableMentions: "everyone" // This is optional. Disables @everyone and @here pings.
 });
 
 client.config = config;
@@ -23,7 +23,7 @@ client.once('ready', () => {
 	client.user.setActivity("status", {
 		type: "PLAYING" // Valid fields are "PLAYING", "LISTENING", "WATCHING", and "STREAMING"
 	});
-	console.log(`Ready on login ${client.user.tag}`);
+	console.log(`Ready on login ${client.user.tag}!`);
 });
 
 
@@ -47,7 +47,7 @@ client.on('message', message => {
 			.setDescription("Only bot owner can execute this command!")
 			.setColor("RED")
 		return message.channel.send(nope)
-	}
+	} // Makes commands labeled as owner-only not execute unless the user is the bot owner.
 
 	if (!cooldowns.has(command.name)) {
 		cooldowns.set(command.name, new Discord.Collection());
@@ -55,7 +55,7 @@ client.on('message', message => {
 
 	const now = Date.now();
 	const timestamps = cooldowns.get(command.name);
-	const cooldownAmount = (command.cooldown || 3) * 1000;
+	const cooldownAmount = (command.cooldown) * 1000;
 
 	if (timestamps.has(message.author.id)) {
 		const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
@@ -75,9 +75,9 @@ client.on('message', message => {
 		command.execute(message, args, client);
 	} catch (error) {
 		console.error(error);
-		message.channel.send(`There was an error executing the command \`${command.name}\`: \n \`\`\`${error}\`\`\`);
+		message.channel.send(`There was an error executing the command \`${command.name}\`: \n \`\`\`${error}\`\`\`); // This will execute on command errors
 	}
 });
 
 
-client.login(token);
+client.login(token); // Logs into the bot

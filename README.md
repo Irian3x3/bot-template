@@ -12,3 +12,4 @@ $ npm i discord.js
 > ### [Example of how a command would look like](/commands/cmd-example.js)
 
 ## [License (MIT)](/LICENSE)
+## [Contributing](/CONTRIBUTING.md)

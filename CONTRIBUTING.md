@@ -4,4 +4,4 @@
 | **Note: replace** `your-username` **with your GitHub username**
 - Create your feature branch: `git checkout -b my-new-feature`
 - Push to the branch: `git push origin my-new-feature`
-- Submit a [pull request](https://github.com/Irian3x3/bot-template/pulls) 🙂
+- Submit a [pull request](https://github.com/Irian3x3/bot-template/compare) 🙂

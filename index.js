@@ -21,9 +21,9 @@ const cooldowns = new Discord.Collection();
 
 client.once('ready', () => {
 	client.user.setActivity("status", {
-		type: "PLAYING"
+		type: "PLAYING" // Valid fields are "PLAYING", "LISTENING", "WATCHING", and "STREAMING"
 	});
-	console.log(`Ready ${client.user.tag}`);
+	console.log(`Ready on login ${client.user.tag}`);
 });
 
 

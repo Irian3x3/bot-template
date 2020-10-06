@@ -13,3 +13,4 @@ $ npm i discord.js
 
 ## [License (MIT)](/LICENSE)
 ## [Contributing](/CONTRIBUTING.md)
+## [Setting up](../../wiki/Getting-Started)
